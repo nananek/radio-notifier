@@ -1,0 +1,10 @@
+[Unit]
+Description=Fire radio-notifier on weekday mornings before lunch (11:30 JST)
+
+[Timer]
+OnCalendar=Mon..Fri 11:30:00 Asia/Tokyo
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

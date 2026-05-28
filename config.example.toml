@@ -1,0 +1,89 @@
+# radio-notifier configuration example.
+# Copy to ~/.config/radio-notifier/config.toml and fill in the blanks.
+
+[discord]
+webhook_url = "https://discord.com/api/webhooks/REPLACE_ME"
+
+[settings]
+# state_path = "~/.local/state/radio-notifier/state.json"  # default
+youtube_feed_template = "https://www.youtube.com/feeds/videos.xml?channel_id={channel_id}"
+# radiko time-free URL pattern. {ymd} = YYYYMMDD (broadcast date), {hms} = HHMMSS (start time).
+radiko_timefree_template = "https://radiko.jp/#!/ts/QRR/{ymd}{hms}"
+
+
+# ---------- Monday ----------
+[[shows]]
+id = "mon-suzuhara"
+weekday = "mon"
+name = "鈴原希実の明日はなんしちょっと?"
+source = "youtube"
+channel_id = "UC_REPLACE_ME"          # 文化放送A&G
+title_filter = "明日はなんしちょっと"
+
+
+# ---------- Tuesday (fixed URLs) ----------
+[[shows]]
+id = "tue-hayami"
+weekday = "tue"
+name = "早見沙織のふり〜すたいる"
+source = "static"
+
+  [[shows.urls]]
+  type = "radiko_timefree"
+  # 放送 (見せられる timefree 開始) 日時。offset_days = 火曜の何日後/前か (例: 当日 = 0)。
+  offset_days = 0
+  program_start = "13:00:00"
+
+  [[shows.urls]]
+  type = "literal"
+  url = "https://qlover.jp/programs/REPLACE_ME"
+  label = "QloveR 動画"
+
+
+# ---------- Wednesday ----------
+[[shows]]
+id = "wed-ogura"
+weekday = "wed"
+name = "#ゆいしょ！ 〜小倉唯といっしょ！〜"
+source = "youtube"
+channel_id = "UC_REPLACE_ME"          # 小倉唯公式
+title_filter = "ゆいしょ"
+
+
+# ---------- Thursday (rotation_group: pick 1 of 3) ----------
+[[shows]]
+id = "thu-yukinoki"
+weekday = "thu"
+rotation_group = "thursday"
+name = "ゆうきとねきのすきにやるTV"
+source = "youtube"
+channel_id = "UC_REPLACE_ME"          # QINOCOP TV
+title_filter = "すきにやるTV"
+
+[[shows]]
+id = "thu-kotonoha"
+weekday = "thu"
+rotation_group = "thursday"
+name = "能登麻美子 ことのはNOTE"
+source = "youtube"
+channel_id = "UC_REPLACE_ME"          # QINOCOP
+title_filter = "ことのはNOTE"
+
+[[shows]]
+id = "thu-yuhikaku"
+weekday = "thu"
+rotation_group = "thursday"
+name = "ゆうひかくradio"
+source = "youtube"
+channel_id = "UC_REPLACE_ME"          # 有斐閣Online
+title_filter = "ゆうひかく"
+
+
+# ---------- Friday ----------
+[[shows]]
+id = "fri-itoh"
+weekday = "fri"
+name = "伊藤真の元気が出る憲法アップデート"
+source = "youtube"
+channel_id = "UC_REPLACE_ME"          # 伊藤塾
+title_filter = "憲法アップデート"

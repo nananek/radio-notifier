@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015"
+      xmlns:media="http://search.yahoo.com/mrss/"
+      xmlns="http://www.w3.org/2005/Atom">
+  <id>yt:channel:UCexample</id>
+  <yt:channelId>UCexample</yt:channelId>
+  <title>Example Channel</title>
+  <link rel="alternate" href="https://www.youtube.com/channel/UCexample"/>
+  <author>
+    <name>Example Channel</name>
+    <uri>https://www.youtube.com/channel/UCexample</uri>
+  </author>
+  <published>2024-01-01T00:00:00+00:00</published>
+
+  <entry>
+    <id>yt:video:vid_newest</id>
+    <yt:videoId>vid_newest</yt:videoId>
+    <yt:channelId>UCexample</yt:channelId>
+    <title>明日はなんしちょっと? 第99回</title>
+    <link rel="alternate" href="https://www.youtube.com/watch?v=vid_newest"/>
+    <author><name>Example Channel</name></author>
+    <published>2026-05-26T12:00:00+00:00</published>
+    <updated>2026-05-26T12:00:00+00:00</updated>
+    <media:group>
+      <media:title>明日はなんしちょっと? 第99回</media:title>
+      <media:thumbnail url="https://i.ytimg.com/vi/vid_newest/hqdefault.jpg" width="480" height="360"/>
+      <media:description>鈴原希実がお届けする週刊ラジオ</media:description>
+    </media:group>
+  </entry>
+
+  <entry>
+    <id>yt:video:vid_member</id>
+    <yt:videoId>vid_member</yt:videoId>
+    <yt:channelId>UCexample</yt:channelId>
+    <title>【メンバー限定】鈴原希実 おまけトーク</title>
+    <link rel="alternate" href="https://www.youtube.com/watch?v=vid_member"/>
+    <author><name>Example Channel</name></author>
+    <published>2026-05-25T12:00:00+00:00</published>
+    <updated>2026-05-25T12:00:00+00:00</updated>
+    <media:group>
+      <media:title>【メンバー限定】鈴原希実 おまけトーク</media:title>
+      <media:thumbnail url="https://i.ytimg.com/vi/vid_member/hqdefault.jpg" width="480" height="360"/>
+      <media:description>メンバーシップ限定動画</media:description>
+    </media:group>
+  </entry>
+
+  <entry>
+    <id>yt:video:vid_unrelated</id>
+    <yt:videoId>vid_unrelated</yt:videoId>
+    <yt:channelId>UCexample</yt:channelId>
+    <title>別番組のお知らせ</title>
+    <link rel="alternate" href="https://www.youtube.com/watch?v=vid_unrelated"/>
+    <author><name>Example Channel</name></author>
+    <published>2026-05-24T12:00:00+00:00</published>
+    <updated>2026-05-24T12:00:00+00:00</updated>
+    <media:group>
+      <media:title>別番組のお知らせ</media:title>
+      <media:thumbnail url="https://i.ytimg.com/vi/vid_unrelated/hqdefault.jpg" width="480" height="360"/>
+      <media:description>別の番組</media:description>
+    </media:group>
+  </entry>
+
+  <entry>
+    <id>yt:video:vid_old</id>
+    <yt:videoId>vid_old</yt:videoId>
+    <yt:channelId>UCexample</yt:channelId>
+    <title>明日はなんしちょっと? 第98回</title>
+    <link rel="alternate" href="https://www.youtube.com/watch?v=vid_old"/>
+    <author><name>Example Channel</name></author>
+    <published>2026-05-19T12:00:00+00:00</published>
+    <updated>2026-05-19T12:00:00+00:00</updated>
+    <media:group>
+      <media:title>明日はなんしちょっと? 第98回</media:title>
+      <media:thumbnail url="https://i.ytimg.com/vi/vid_old/hqdefault.jpg" width="480" height="360"/>
+      <media:description>先週のアーカイブ</media:description>
+    </media:group>
+  </entry>
+</feed>

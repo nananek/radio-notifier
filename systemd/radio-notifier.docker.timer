@@ -1,0 +1,11 @@
+[Unit]
+Description=Fire radio-notifier (Docker) on weekday mornings before lunch (11:30 JST)
+
+[Timer]
+Unit=radio-notifier.docker.service
+OnCalendar=Mon..Fri 11:30:00 Asia/Tokyo
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target
