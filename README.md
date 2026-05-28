@@ -49,7 +49,7 @@ journalctl --user -u radio-notifier -f
 
 ## Docker でのデプロイ
 
-別マシンで動かすときは Docker 経由で。`git clone` → `docker build` → systemd user timer の流れ。
+別マシンで動かすときは Docker 経由で。`git clone` → `docker build` → systemd user timer の流れ。Claude Code に投げる場合は [`docs/DEPLOY.md`](docs/DEPLOY.md) を渡すとそのまま順に実行できる。
 
 ### 1. ターゲットマシンで準備
 
