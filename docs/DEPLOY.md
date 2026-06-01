@@ -41,13 +41,16 @@ docker info 2>&1 | grep -iE 'rootless|root dir'
 
 > **rootless / rootful の差**: 同梱の `radio-notifier.docker.service` は rootless 前提（コンテナ内 root が host のユーザーにマップされるので `--user` を渡さない）。**rootful docker を使う場合は手順 6 で `--user %U:%G` を `ExecStart` に追加してください**。
 
-### 2. リポジトリを clone してイメージをビルド
+### 2. リポジトリを clone してイメージを取得
+
+main への push で GitHub Actions が `ghcr.io/nananek/radio-notifier:latest` を自動ビルドして GHCR に push している。clone は systemd unit を取りに行くだけ。
 
 ```sh
 git clone https://github.com/nananek/radio-notifier ~/repos/radio-notifier
 cd ~/repos/radio-notifier
-docker build -t radio-notifier:latest .
-docker images radio-notifier
+docker pull ghcr.io/nananek/radio-notifier:latest
+docker images ghcr.io/nananek/radio-notifier
+# 自前ビルドしたい場合: docker build -t ghcr.io/nananek/radio-notifier:latest .
 ```
 
 ### 3. ayaka から `config.toml` と `state.json` を持ってくる
@@ -72,7 +75,7 @@ for d in 2026-06-01 2026-06-02 2026-06-03 2026-06-04 2026-06-05; do
   docker run --rm -e TZ=Asia/Tokyo \
     -v ~/.config/radio-notifier:/config/radio-notifier:ro \
     -v ~/.local/state/radio-notifier:/state/radio-notifier \
-    radio-notifier:latest dry-run --date $d
+    ghcr.io/nananek/radio-notifier:latest dry-run --date $d
 done
 ```
 
@@ -95,7 +98,7 @@ mv ~/.local/state/radio-notifier/state.json ~/.local/state/radio-notifier/state.
 docker run --rm -e TZ=Asia/Tokyo \
   -v ~/.config/radio-notifier:/config/radio-notifier:ro \
   -v ~/.local/state/radio-notifier:/state/radio-notifier \
-  radio-notifier:latest run
+  ghcr.io/nananek/radio-notifier:latest run
 # Discord で届いたことを確認したら元に戻す
 mv ~/.local/state/radio-notifier/state.json.bak ~/.local/state/radio-notifier/state.json
 ```

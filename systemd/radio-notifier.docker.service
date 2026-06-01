@@ -5,7 +5,10 @@ Wants=network-online.target
 
 [Service]
 Type=oneshot
-Environment=IMAGE=radio-notifier:latest
+Environment=IMAGE=ghcr.io/nananek/radio-notifier:latest
+# Pull the latest image before running so a fresh build from CI is picked up
+# without manual `docker pull`. `|| true` keeps the run going if offline.
+ExecStartPre=-/usr/bin/docker pull ${IMAGE}
 # In rootless docker / podman, container root maps to the host user, so we do NOT
 # pass --user here. For rootful docker, add `--user $(id -u):$(id -g)`.
 ExecStart=/usr/bin/docker run --rm \

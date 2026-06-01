@@ -49,7 +49,7 @@ journalctl --user -u radio-notifier -f
 
 ## Docker でのデプロイ
 
-別マシンで動かすときは Docker 経由で。`git clone` → `docker build` → systemd user timer の流れ。Claude Code に投げる場合は [`docs/DEPLOY.md`](docs/DEPLOY.md) を渡すとそのまま順に実行できる。
+別マシンで動かすときは Docker 経由で。main への push で GitHub Actions が `ghcr.io/nananek/radio-notifier:latest` を自動ビルド & push するので、ターゲットマシンでは `docker pull` するだけでよい。Claude Code に投げる場合は [`docs/DEPLOY.md`](docs/DEPLOY.md) を渡すとそのまま順に実行できる。
 
 ### 1. ターゲットマシンで準備
 
@@ -59,12 +59,13 @@ systemctl --user enable --now docker.socket
 loginctl enable-linger $USER                       # 不在時もタイマー動くように
 ```
 
-### 2. リポジトリ取得 + イメージビルド
+### 2. リポジトリ取得 + イメージ取得
 
 ```sh
-git clone <this-repo> ~/repos/radio-notifier
+git clone <this-repo> ~/repos/radio-notifier       # systemd unit を取りに行くだけ
 cd ~/repos/radio-notifier
-docker build -t radio-notifier:latest .
+docker pull ghcr.io/nananek/radio-notifier:latest
+# ローカルでビルドしたい場合は: docker build -t ghcr.io/nananek/radio-notifier:latest .
 ```
 
 ### 3. 設定とステートの置き場を用意
@@ -83,13 +84,13 @@ docker run --rm \
   -e TZ=Asia/Tokyo \
   -v ~/.config/radio-notifier:/config/radio-notifier:ro \
   -v ~/.local/state/radio-notifier:/state/radio-notifier \
-  radio-notifier:latest list
+  ghcr.io/nananek/radio-notifier:latest list
 
 docker run --rm \
   -e TZ=Asia/Tokyo \
   -v ~/.config/radio-notifier:/config/radio-notifier:ro \
   -v ~/.local/state/radio-notifier:/state/radio-notifier \
-  radio-notifier:latest dry-run
+  ghcr.io/nananek/radio-notifier:latest dry-run
 ```
 
 ### 5. systemd user timer に組み込む
