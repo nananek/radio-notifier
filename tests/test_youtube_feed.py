@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime
 from pathlib import Path
 
 from radio_notifier.feeds.youtube import parse
-from radio_notifier.filters import is_members_only, matches_title
+from radio_notifier.filters import is_members_only, is_upcoming, matches_title
 
 FIXTURE = Path(__file__).parent / "fixtures" / "youtube_sample.xml"
 
@@ -23,14 +24,23 @@ def test_parse_extracts_video_id_and_url() -> None:
 def test_title_filter_drops_unrelated() -> None:
     entries = _entries()
     matched = [e for e in entries if matches_title(e.title, "明日はなんしちょっと")]
-    # vid_member's title is "【メンバー限定】鈴原希実 おまけトーク" — passes neither filter
-    assert {e.video_id for e in matched} == {"vid_newest", "vid_old"}
+    # vid_member's title is "【メンバー限定】鈴原希実 おまけトーク" — doesn't match
+    assert {e.video_id for e in matched} == {"vid_newest", "vid_premiere", "vid_old"}
 
 
 def test_members_only_filter() -> None:
     entries = _entries()
     public = [e for e in entries if not is_members_only(e.title, e.description)]
     assert "vid_member" not in {e.video_id for e in public}
+
+
+def test_upcoming_filter_drops_premieres() -> None:
+    entries = _entries()
+    now = datetime(2026, 6, 1, tzinfo=UTC)
+    aired = [e for e in entries if not is_upcoming(e.published, now)]
+    assert "vid_premiere" not in {e.video_id for e in aired}
+    # past entries pass through
+    assert {"vid_newest", "vid_old"} <= {e.video_id for e in aired}
 
 
 def test_published_is_parsed() -> None:

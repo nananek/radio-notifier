@@ -7,7 +7,7 @@ import feedparser
 import httpx
 
 from radio_notifier.feeds import Entry
-from radio_notifier.filters import is_members_only, matches_title
+from radio_notifier.filters import is_members_only, is_upcoming, matches_title
 
 DEFAULT_TIMEOUT = 15.0
 
@@ -34,14 +34,18 @@ def fetch(
     template: str,
     title_filter: str | None = None,
     timeout: float = DEFAULT_TIMEOUT,
+    now: datetime | None = None,
 ) -> list[Entry]:
     url = template.format(channel_id=channel_id)
     xml = fetch_url(url, timeout=timeout)
     entries = parse(xml)
+    when = now or datetime.now(UTC)
     return [
         e
         for e in entries
-        if matches_title(e.title, title_filter) and not is_members_only(e.title, e.description)
+        if matches_title(e.title, title_filter)
+        and not is_members_only(e.title, e.description)
+        and not is_upcoming(e.published, when)
     ]
 
 

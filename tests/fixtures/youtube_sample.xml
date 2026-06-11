@@ -61,6 +61,22 @@
   </entry>
 
   <entry>
+    <id>yt:video:vid_premiere</id>
+    <yt:videoId>vid_premiere</yt:videoId>
+    <yt:channelId>UCexample</yt:channelId>
+    <title>明日はなんしちょっと? 第100回（プレミア公開）</title>
+    <link rel="alternate" href="https://www.youtube.com/watch?v=vid_premiere"/>
+    <author><name>Example Channel</name></author>
+    <published>2099-12-31T12:00:00+00:00</published>
+    <updated>2099-12-31T12:00:00+00:00</updated>
+    <media:group>
+      <media:title>明日はなんしちょっと? 第100回（プレミア公開）</media:title>
+      <media:thumbnail url="https://i.ytimg.com/vi/vid_premiere/hqdefault.jpg" width="480" height="360"/>
+      <media:description>来週放送予定のプレミア公開</media:description>
+    </media:group>
+  </entry>
+
+  <entry>
     <id>yt:video:vid_old</id>
     <yt:videoId>vid_old</yt:videoId>
     <yt:channelId>UCexample</yt:channelId>
