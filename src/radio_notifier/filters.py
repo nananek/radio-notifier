@@ -36,3 +36,15 @@ def is_upcoming(published: datetime, now: datetime | None = None) -> bool:
     if now is None:
         now = datetime.now(UTC)
     return published > now
+
+
+def is_unaired_premiere(views: int | None) -> bool:
+    """True if the YouTube RSS entry's view count is exactly 0. Premiere videos
+    sit at 0 views until their scheduled air time; once they go live, even a
+    handful of preview hits push the counter to ≥1 within minutes.
+
+    The trade-off is that a freshly-uploaded normal video may briefly read 0
+    views too. In practice the bot fires at 11:30 JST on weekdays and the
+    target radio shows are uploaded hours-to-days in advance, so a real 0 is
+    overwhelmingly a premiere. Worst case is one day's pick is delayed."""
+    return views == 0

@@ -15,3 +15,4 @@ class Entry:
     description: str = ""
     thumbnail: str | None = None
     label: str | None = None  # optional extra annotation for static URLs
+    views: int | None = None  # YouTube media:statistics view count; None for static

@@ -73,6 +73,30 @@
       <media:title>明日はなんしちょっと? 第100回（プレミア公開）</media:title>
       <media:thumbnail url="https://i.ytimg.com/vi/vid_premiere/hqdefault.jpg" width="480" height="360"/>
       <media:description>来週放送予定のプレミア公開</media:description>
+      <media:community>
+        <media:starRating count="0" average="0.0" min="1" max="5"/>
+        <media:statistics views="0"/>
+      </media:community>
+    </media:group>
+  </entry>
+
+  <entry>
+    <id>yt:video:vid_scheduled</id>
+    <yt:videoId>vid_scheduled</yt:videoId>
+    <yt:channelId>UCexample</yt:channelId>
+    <title>明日はなんしちょっと? 第101回 (2026年6月20日配信)</title>
+    <link rel="alternate" href="https://www.youtube.com/watch?v=vid_scheduled"/>
+    <author><name>Example Channel</name></author>
+    <published>2026-05-27T12:00:00+00:00</published>
+    <updated>2026-05-27T12:00:00+00:00</updated>
+    <media:group>
+      <media:title>明日はなんしちょっと? 第101回 (2026年6月20日配信)</media:title>
+      <media:thumbnail url="https://i.ytimg.com/vi/vid_scheduled/hqdefault.jpg" width="480" height="360"/>
+      <media:description>未来日配信予定 (published は過去だが views=0)</media:description>
+      <media:community>
+        <media:starRating count="0" average="0.0" min="1" max="5"/>
+        <media:statistics views="0"/>
+      </media:community>
     </media:group>
   </entry>
 

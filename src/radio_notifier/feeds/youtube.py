@@ -7,7 +7,12 @@ import feedparser
 import httpx
 
 from radio_notifier.feeds import Entry
-from radio_notifier.filters import is_members_only, is_upcoming, matches_title
+from radio_notifier.filters import (
+    is_members_only,
+    is_unaired_premiere,
+    is_upcoming,
+    matches_title,
+)
 
 DEFAULT_TIMEOUT = 15.0
 
@@ -46,6 +51,7 @@ def fetch(
         if matches_title(e.title, title_filter)
         and not is_members_only(e.title, e.description)
         and not is_upcoming(e.published, when)
+        and not is_unaired_premiere(e.views)
     ]
 
 
@@ -64,6 +70,7 @@ def _to_entry(raw: Any) -> Entry | None:
         description = raw["media_description"]
     elif isinstance(raw.get("summary"), str):
         description = raw["summary"]
+    views = _parse_views(raw.get("media_statistics"))
     return Entry(
         video_id=yt_video_id,
         title=raw.get("title", ""),
@@ -71,7 +78,20 @@ def _to_entry(raw: Any) -> Entry | None:
         published=published,
         description=description,
         thumbnail=thumbnail,
+        views=views,
     )
+
+
+def _parse_views(stats: Any) -> int | None:
+    if not isinstance(stats, dict):
+        return None
+    raw = stats.get("views")
+    if raw is None:
+        return None
+    try:
+        return int(raw)
+    except (TypeError, ValueError):
+        return None
 
 
 def _extract_video_id(entry_id: str) -> str | None:
